@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVC_Test_App.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,12 @@ namespace MVC_Test_App.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult ViewEmployees()
+        {
+            var vm = new EmployeeViewModel();
+            return View(vm);
         }
 
 
