@@ -35,11 +35,11 @@ namespace MVC_Test_App.Controllers
             return View(employee);
         }
 
-        //public ActionResult Create()
-        //{
+        public ActionResult Create()
+        {
 
-        //    return View("NewEmployee");
-        //}
+            return View("NewEmployee");
+        }
 
         //[HttpPost]
         //public ActionResult Create(EmployeeViewModel vm)
