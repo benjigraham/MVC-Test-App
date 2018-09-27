@@ -35,32 +35,32 @@ namespace MVC_Test_App.Controllers
             return View(employee);
         }
 
-        public ActionResult Create()
-        {
-            
-            return View("NewEmployee");
-        }
+        //public ActionResult Create()
+        //{
 
-        [HttpPost]
-        public ActionResult Create(EmployeeViewModel vm)
-        {
-            vm.employeeList.Add(new Employee(
-                vm.employeeList.Count + 1,
-                vm.employee.FirstName,
-                vm.employee.LastName,
-                vm.employee.EmpStatus,
-                vm.employee.Department,
-                vm.employee.PhoneNum,
-                vm.employee.Email,
-                vm.employee.Address1,
-                vm.employee.Address2,
-                vm.employee.City,
-                vm.employee.State,
-                vm.employee.Zip
-                ));
+        //    return View("NewEmployee");
+        //}
 
-            return RedirectToAction("EmployeeDetails", vm.employeeList.Last().ID);
-        }
+        //[HttpPost]
+        //public ActionResult Create(EmployeeViewModel vm)
+        //{
+        //    vm.employeeList.Add(new Employee(
+        //        vm.employeeList.Count + 1,
+        //        vm.employee.FirstName,
+        //        vm.employee.LastName,
+        //        vm.employee.EmpStatus,
+        //        vm.employee.Department,
+        //        vm.employee.PhoneNum,
+        //        vm.employee.Email,
+        //        vm.employee.Address1,
+        //        vm.employee.Address2,
+        //        vm.employee.City,
+        //        vm.employee.State,
+        //        vm.employee.Zip
+        //        ));
+
+        //    return RedirectToAction("EmployeeDetails", vm.employeeList.Last().ID);
+        //}
 
     }
 }
