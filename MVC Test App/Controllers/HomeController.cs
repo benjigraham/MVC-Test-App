@@ -1,4 +1,5 @@
-﻿using MVC_Test_App.ViewModel;
+﻿using MVC_Test_App.Models;
+using MVC_Test_App.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,15 @@ namespace MVC_Test_App.Controllers
         public ActionResult ViewEmployees()
         {
             var vm = new EmployeeViewModel();
-            return View("ViewEmployees", vm);
+            return View(vm);
+        }
+
+        public ActionResult EmployeeDetails(int id)
+        {
+            var vm = new EmployeeViewModel();
+            vm.employee = vm.employeeList.SingleOrDefault(i => i.ID == id);
+            return View(vm);
+                
         }
 
 
