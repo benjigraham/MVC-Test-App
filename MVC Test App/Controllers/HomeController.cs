@@ -17,7 +17,7 @@ namespace MVC_Test_App.Controllers
         public ActionResult ViewEmployees()
         {
             var vm = new EmployeeViewModel();
-            return View(vm);
+            return View("ViewEmployees", vm);
         }
 
 
