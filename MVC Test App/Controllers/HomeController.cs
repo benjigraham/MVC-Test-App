@@ -71,6 +71,9 @@ namespace MVC_Test_App.Controllers
             return Json(true);
         }
 
+        //Kind of a hackish way to handle the management/non-management drop-down list on the employee grid. There's 
+        // almost certainly a better way to do this, but I wanted to just get something done for the purpose of this test
+
         private bool ShowManager(string lookup, string department)
         {
             if (lookup == "allEmployees") return true;
@@ -100,6 +103,8 @@ namespace MVC_Test_App.Controllers
         }
     }
 
+
+    //Static class to have a persisting static list in the app in lieu of a database
     public static class Employees
     {
         public static List<Employee> EmpList = new List<Employee>
