@@ -62,6 +62,19 @@ namespace MVC_Test_App.Models
             Zip = zip;
         }
 
+        public bool isManager(string department)
+        {
+            switch (department)
+            {
+                case "Manager":
+                    return true;
+                    
+
+                default :
+                    return false;
+                    
+            }
+        }
 
     }
 }
