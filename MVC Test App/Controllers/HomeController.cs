@@ -10,6 +10,9 @@ namespace MVC_Test_App.Controllers
 {
     public class HomeController : Controller
     {
+
+        
+
         public ActionResult Index()
         {
             return View();
@@ -18,21 +21,38 @@ namespace MVC_Test_App.Controllers
         public ActionResult ViewEmployees()
         {
             var vm = new EmployeeViewModel();
+            vm.employeeList = Employees.empList;
+            
             return View(vm);
         }
 
         public ActionResult EmployeeDetails(int id)
         {
-            var vm = new EmployeeViewModel();
-            vm.employee = vm.employeeList.SingleOrDefault(i => i.ID == id);
-            return View(vm.employee);
+            
+            var employee = Employees.empList.SingleOrDefault(i => i.ID == id);
+            return View(employee);
                 
         }
 
-        public ActionResult Edit(EmployeeViewModel vm, int id)
+        public ActionResult EmployeeDetails(Employee employee)
         {
-            var employee = vm.employeeList.SingleOrDefault(i => i.ID == id);
+
+            
             return View(employee);
+
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var employee = Employees.empList.SingleOrDefault(i => i.ID == id);
+            return View(employee);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Employee employee)
+        {
+            Employees.editListItem(employee);
+            return View("EmployeeDetails", employee);
         }
 
         public ActionResult Create()
@@ -41,26 +61,56 @@ namespace MVC_Test_App.Controllers
             return View("NewEmployee");
         }
 
-        //[HttpPost]
-        //public ActionResult Create(EmployeeViewModel vm)
-        //{
-        //    vm.employeeList.Add(new Employee(
-        //        vm.employeeList.Count + 1,
-        //        vm.employee.FirstName,
-        //        vm.employee.LastName,
-        //        vm.employee.EmpStatus,
-        //        vm.employee.Department,
-        //        vm.employee.PhoneNum,
-        //        vm.employee.Email,
-        //        vm.employee.Address1,
-        //        vm.employee.Address2,
-        //        vm.employee.City,
-        //        vm.employee.State,
-        //        vm.employee.Zip
-        //        ));
+        [HttpPost]
+        public ActionResult Create(Employee employee)
+        {
+            Employees.addToList(employee);
+            return View("EmployeeDetails", employee);
+        }
 
-        //    return RedirectToAction("EmployeeDetails", vm.employeeList.Last().ID);
-        //}
 
+
+
+
+    }
+
+    public static class Employees
+    {
+        public static List<Employee> empList = new List<Employee> {
+            new Employee(1, "Bob", "Cobb", "Active", "General", "918-555-5555", "bobcobb@myCompany.com", "1234 Mega Drive", "", "Dallas", "TX", "75001"),
+            new Employee(2, "Bobbie", "Cobb", "Active", "HR", "918-555-5555", "bobbiecobb@myCompany.com", "1234 Mega Drive", "", "Dallas", "TX", "75001"),
+            new Employee(3, "Mary", "Sue", "Active", "Manager", "918-555-5555", "marysue@myCompany.com", "4567 5th Avenue", "", "Dallas", "TX", "75001"),
+            new Employee(4, "Gary", "Stu", "Inactive", "Cashier", "918-555-5555", "garystu@myCompany.com", "4567 5th Avenue", "", "Dallas", "TX", "75001")
+        };
+
+
+
+        public static void addToList(Employee employee)
+        {
+            empList.Add(new Employee(
+                empList.Count() + 1,
+                employee.FirstName,
+                employee.LastName,
+                employee.EmpStatus,
+                employee.Department,
+                employee.PhoneNum,
+                employee.Email,
+                employee.Address1,
+                employee.Address2,
+                employee.City,
+                employee.State,
+                employee.Zip
+                ));
+
+            
+        }
+
+        public static void editListItem(Employee employee)
+        {
+            var index = empList.FindIndex(i => i.ID == employee.ID);
+            empList[index] = employee;
+
+            
+        }
     }
 }
