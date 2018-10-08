@@ -34,7 +34,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.EmpStatus, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EmpStatus, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                @{
+                    var items = new SelectList(new[]
+                    {
+                        new SelectListItem{Text = "", Value = ""},
+                        new SelectListItem{Text = "Active", Value = "Active"},
+                        new SelectListItem {Text = "Inactive", Value = "Inactive"}
+                    }, "Text", "Value");
+                }
+                @Html.DropDownListFor(model => model.EmpStatus, @items, htmlAttributes: new { @class = "form-control", @required = "required" })
                 @Html.ValidationMessageFor(model => model.EmpStatus, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,7 +50,18 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Department, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                @{
+                    var depItems = new SelectList(new[]
+                    {
+                        new SelectListItem{Text = "", Value = ""},
+                        new SelectListItem {Text = "Manager", Value = "Manager"},
+                        new SelectListItem {Text = "HR", Value = "HR"},
+                        new SelectListItem {Text = "General", Value = "General"},
+                        new SelectListItem {Text = "Cashier", Value = "Cashier"},
+                        new SelectListItem {Text = "Accounting", Value = "Accounting"}
+                    }, "Text", "Value");
+                }
+                @Html.DropDownListFor(model => model.Department, @depItems, htmlAttributes: new { @class = "form-control", @required = "required" })
                 @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
             </div>
         </div>
